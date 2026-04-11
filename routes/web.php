@@ -10,6 +10,7 @@ use App\Http\Controllers\PoliController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PeriksaController;
 use App\Http\Controllers\PendaftaranController;
+use App\Http\Controllers\Admin\PoliController as AdminPoliController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/obat/{id}/update', [ObatController::class, 'update']);
     Route::get('/obat/{id}/delete', [ObatController::class, 'destroy']);
 
+    Route::resource('polis', AdminPoliController::class)->middleware('role:admin');
     Route::get('/poli', [PoliController::class, 'index']);
     Route::post('/poli', [PoliController::class, 'store']);
     Route::get('/poli/{id}/edit', [PoliController::class, 'edit']);

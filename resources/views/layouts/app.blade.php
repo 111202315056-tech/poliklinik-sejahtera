@@ -45,7 +45,7 @@
     <aside class="sidebar">
         <div class="sidebar-logo">
             <div class="sidebar-logo-icon">
-                <i class="fa-solid fa-plus" style="color:white; font-size:16px;"></i>
+                <img src="/logo.png" style="width:36px;height:36px;object-fit:contain;border-radius:50%;">
             </div>
             <span class="sidebar-logo-text">Poliklinik<br>Sejahtera</span>
         </div>
