@@ -4,7 +4,9 @@ use App\Models\User;
 use App\Models\Obat;
 use App\Models\Poli;
 use App\Models\DaftarPoli;
+use App\Models\Periksa;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 class HomeController extends Controller {
     public function index() {
         $user = Auth::user();
@@ -13,7 +15,9 @@ class HomeController extends Controller {
             $totalDokter = User::where('role','dokter')->count();
             $totalPasien = User::where('role','pasien')->count();
             $totalObat = Obat::count();
-            return view('home_admin', compact('totalPoli','totalDokter','totalPasien','totalObat'));
+            $totalPeriksa = Periksa::count();
+            $chartData = DaftarPoli::select(DB::raw('DATE(created_at) as tgl'), DB::raw('count(*) as total'))->groupBy('tgl')->orderBy('tgl','desc')->limit(7)->get()->reverse()->values();
+            return view('home_admin', compact('totalPoli','totalDokter','totalPasien','totalObat','totalPeriksa','chartData'));
         }
         if ($user->role === 'dokter') {
             $totalPeriksa = DaftarPoli::whereHas('jadwalPeriksa', function($q) use($user){ $q->where('id_dokter',$user->id); })->whereHas('periksa')->count();

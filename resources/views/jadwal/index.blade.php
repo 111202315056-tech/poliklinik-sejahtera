@@ -31,7 +31,7 @@
 
     <div class="md:col-span-2">
         <div class="bg-white rounded-xl shadow p-6">
-            <h2 class="text-lg font-bold text-gray-700 mb-4"><i class="fa fa-calendar-days mr-2 text-blue-500"></i>Jadwal Praktek Saya</h2>
+            <h2 class="text-lg font-bold text-gray-700 mb-4"><i class="fa fa-calendar-days mr-2 text-blue-500"></i>Jadwal Praktek Saya</h2><a href="/export/jadwal" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;display:inline-block;margin-bottom:12px;\"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a>
             <div class="overflow-x-auto">
                 <table class="w-full text-sm">
                     <thead class="bg-blue-50 text-blue-700">

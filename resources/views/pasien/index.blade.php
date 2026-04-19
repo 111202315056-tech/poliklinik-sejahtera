@@ -36,7 +36,7 @@
 </form>
 </div>
 <div style="background:white;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);padding:24px;">
-<h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:16px;"><i class="fa fa-list" style="color:#16a34a;margin-right:8px;"></i>Daftar Pasien</h2>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:0;"><i class="fa fa-list" style="color:#16a34a;margin-right:8px;"></i>Daftar Pasien</h2><a href="/export/pasien" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a></div>
 <table style="width:100%;border-collapse:collapse;font-size:13px;">
 <thead>
 <tr style="background:#f0fdf4;">

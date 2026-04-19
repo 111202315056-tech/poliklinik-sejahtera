@@ -1,68 +1,72 @@
 @extends('layouts.app')
 @section('content')
-
-<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-    <div class="md:col-span-1">
-        <div class="bg-white rounded-xl shadow p-6">
-            <h2 class="text-lg font-bold text-gray-700 mb-4"><i class="fa fa-pills mr-2 text-purple-500"></i>{{ isset($obat) ? "Edit Obat" : "Tambah Obat" }}</h2>
-            <form action="{{ isset($obat) ? '/obat/'.$obat->id.'/update' : '/obat' }}" method="POST">
-                @csrf
-                <div class="mb-3">
-                    <label class="block text-sm text-gray-600 mb-1">Nama Obat</label>
-                    <input type="text" name="nama_obat" placeholder="Nama obat" value="{{ isset($obat) ? $obat->nama_obat : '' }}" class="border border-gray-300 rounded-lg w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400">
-                </div>
-                <div class="mb-3">
-                    <label class="block text-sm text-gray-600 mb-1">Kemasan</label>
-                    <input type="text" name="kemasan" placeholder="Kemasan" value="{{ isset($obat) ? $obat->kemasan : '' }}" class="border border-gray-300 rounded-lg w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400">
-                </div>
-                <div class="mb-3">
-                    <label class="block text-sm text-gray-600 mb-1">Harga</label>
-                    <input type="number" name="harga" placeholder="Harga" value="{{ isset($obat) ? $obat->harga : '' }}" class="border border-gray-300 rounded-lg w-full px-3 py-2 focus:outline-none focus:ring-2 focus:ring-purple-400">
-                </div>
-                <div class="flex gap-2">
-                    <button type="submit" class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded-lg w-full transition"><i class="fa fa-save mr-1"></i>Simpan</button>
-                    @if(isset($obat))
-                    <a href="/obat" class="bg-gray-400 hover:bg-gray-500 text-white px-4 py-2 rounded-lg text-center transition"><i class="fa fa-times"></i></a>
-                    @endif
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="md:col-span-2">
-        <div class="bg-white rounded-xl shadow p-6">
-            <h2 class="text-lg font-bold text-gray-700 mb-4"><i class="fa fa-list mr-2 text-purple-500"></i>Daftar Obat</h2>
-            <div class="overflow-x-auto">
-                <table class="w-full text-sm">
-                    <thead class="bg-purple-50 text-purple-700">
-                        <tr>
-                            <th class="px-4 py-3 text-left rounded-tl-lg">#</th>
-                            <th class="px-4 py-3 text-left">Nama Obat</th>
-                            <th class="px-4 py-3 text-left">Kemasan</th>
-                            <th class="px-4 py-3 text-left">Harga</th>
-                            <th class="px-4 py-3 text-left rounded-tr-lg">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @forelse($obats as $i => $o)
-                        <tr class="border-b hover:bg-gray-50">
-                            <td class="px-4 py-3">{{ $i + 1 }}</td>
-                            <td class="px-4 py-3 font-medium">{{ $o->nama_obat }}</td>
-                            <td class="px-4 py-3 text-gray-500">{{ $o->kemasan }}</td>
-                            <td class="px-4 py-3">Rp {{ number_format($o->harga, 0, ',', '.') }}</td>
-                            <td class="px-4 py-3 flex gap-2">
-                                <a href="/obat/{{ $o->id }}/edit" class="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-lg text-xs transition"><i class="fa fa-edit mr-1"></i>Ubah</a>
-                                <a href="/obat/{{ $o->id }}/delete" onclick="return confirm('Yakin hapus?')" class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded-lg text-xs transition"><i class="fa fa-trash mr-1"></i>Hapus</a>
-                            </td>
-                        </tr>
-                        @empty
-                        <tr><td colspan="5" class="text-center py-6 text-gray-400"><i class="fa fa-inbox text-3xl block mb-2"></i>Belum ada data obat</td></tr>
-                        @endforelse
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;">
+<div style="background:white;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);padding:24px;">
+<h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:16px;"><i class="fa fa-pills" style="color:#8b5cf6;margin-right:8px;"></i>{{ isset($obat) ? 'Edit Obat' : 'Tambah Obat' }}</h2>
+<form action="{{ isset($obat) ? '/obat/'.$obat->id.'/update' : '/obat' }}" method="POST">
+@csrf
+<div style="margin-bottom:12px;">
+<label style="font-size:13px;color:#64748b;display:block;margin-bottom:6px;font-weight:500;">Nama Obat</label>
+<input type="text" name="nama_obat" placeholder="Nama obat" value="{{ isset($obat) ? $obat->nama_obat : '' }}" style="border:1px solid #e2e8f0;border-radius:8px;width:100%;padding:8px 12px;font-size:14px;outline:none;">
 </div>
-
+<div style="margin-bottom:12px;">
+<label style="font-size:13px;color:#64748b;display:block;margin-bottom:6px;font-weight:500;">Kemasan</label>
+<input type="text" name="kemasan" placeholder="Contoh: Tablet, Sirup" value="{{ isset($obat) ? $obat->kemasan : '' }}" style="border:1px solid #e2e8f0;border-radius:8px;width:100%;padding:8px 12px;font-size:14px;outline:none;">
+</div>
+<div style="margin-bottom:12px;">
+<label style="font-size:13px;color:#64748b;display:block;margin-bottom:6px;font-weight:500;">Harga (Rp)</label>
+<input type="number" name="harga" placeholder="Contoh: 5000" value="{{ isset($obat) ? $obat->harga : '' }}" style="border:1px solid #e2e8f0;border-radius:8px;width:100%;padding:8px 12px;font-size:14px;outline:none;">
+</div>
+<div style="margin-bottom:16px;">
+<label style="font-size:13px;color:#64748b;display:block;margin-bottom:6px;font-weight:500;">Stok</label>
+<input type="number" name="stok" placeholder="Jumlah stok" min="0" value="{{ isset($obat) ? $obat->stok : '' }}" style="border:1px solid #e2e8f0;border-radius:8px;width:100%;padding:8px 12px;font-size:14px;outline:none;">
+</div>
+<div style="display:flex;gap:8px;">
+<button type="submit" style="background:#8b5cf6;color:white;border:none;padding:10px 16px;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer;flex:1;"><i class="fa fa-save" style="margin-right:6px;"></i>Simpan</button>
+@if(isset($obat))<a href="/obat" style="background:#94a3b8;color:white;padding:10px 16px;border-radius:8px;font-size:14px;text-decoration:none;display:flex;align-items:center;"><i class="fa fa-times"></i></a>@endif
+</div>
+</form>
+</div>
+<div style="background:white;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);padding:24px;">
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:0;"><i class="fa fa-list" style="color:#8b5cf6;margin-right:8px;"></i>Daftar Obat</h2><a href="/export/obat" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a></div><a href="/export/obat" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a></div>
+@if(session('success'))<div style="background:#dcfce7;border:1px solid #86efac;color:#166534;padding:12px;border-radius:8px;margin-bottom:16px;font-size:13px;">{{ session('success') }}</div>@endif
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<thead><tr style="background:#f5f3ff;">
+<th style="padding:10px 12px;text-align:left;color:#8b5cf6;font-weight:600;">#</th>
+<th style="padding:10px 12px;text-align:left;color:#8b5cf6;font-weight:600;">Nama Obat</th>
+<th style="padding:10px 12px;text-align:left;color:#8b5cf6;font-weight:600;">Kemasan</th>
+<th style="padding:10px 12px;text-align:left;color:#8b5cf6;font-weight:600;">Harga</th>
+<th style="padding:10px 12px;text-align:left;color:#8b5cf6;font-weight:600;">Stok</th>
+<th style="padding:10px 12px;text-align:left;color:#8b5cf6;font-weight:600;">Aksi</th>
+</tr></thead>
+<tbody>
+@forelse($obats as $i => $o)
+<tr style="border-bottom:1px solid #f1f5f9;">
+<td style="padding:12px;">{{ $i+1 }}</td>
+<td style="padding:12px;font-weight:600;color:#1e293b;">{{ $o->nama_obat }}</td>
+<td style="padding:12px;color:#64748b;">{{ $o->kemasan }}</td>
+<td style="padding:12px;">Rp {{ number_format($o->harga,0,',','.') }}</td>
+<td style="padding:12px;">
+@if($o->stok <= 0)
+<span style="background:#fee2e2;color:#dc2626;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;">Habis</span>
+@elseif($o->stok <= 10)
+<span style="background:#fef9c3;color:#ca8a04;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;">{{ $o->stok }} (Menipis)</span>
+@else
+<span style="background:#dcfce7;color:#16a34a;padding:3px 10px;border-radius:20px;font-size:12px;font-weight:600;">{{ $o->stok }}</span>
+@endif
+</td>
+<td style="padding:12px;">
+<div style="display:flex;gap:6px;">
+<a href="/obat/{{ $o->id }}/edit" style="background:#f59e0b;color:white;padding:5px 10px;border-radius:6px;font-size:12px;text-decoration:none;"><i class="fa fa-edit"></i></a>
+<a href="/obat/{{ $o->id }}/delete" onclick="return confirm('Yakin hapus?')" style="background:#ef4444;color:white;padding:5px 10px;border-radius:6px;font-size:12px;text-decoration:none;"><i class="fa fa-trash"></i></a>
+</div>
+</td>
+</tr>
+@empty
+<tr><td colspan="6" style="text-align:center;padding:30px;color:#94a3b8;">Belum ada data obat</td></tr>
+@endforelse
+</tbody>
+</table>
+</div>
+</div>
 @endsection

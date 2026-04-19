@@ -7,4 +7,5 @@ class DaftarPoli extends Model {
     public function pasien() { return $this->belongsTo(User::class, 'id_pasien'); }
     public function jadwalPeriksa() { return $this->belongsTo(JadwalPeriksa::class, 'id_jadwal'); }
     public function periksa() { return $this->hasOne(Periksa::class, 'id_daftar_poli'); }
+    public function pembayaran() { return $this->hasOne(Pembayaran::class, 'id_daftar_poli'); }
 }

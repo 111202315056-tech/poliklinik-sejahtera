@@ -1,24 +1,26 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\Models\JadwalPeriksa;
 use App\Models\Poli;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-class JadwalController extends Controller
-{
-    public function index()
-    {
+class JadwalController extends Controller {
+    public function index() {
         $user = Auth::user();
         $jadwals = JadwalPeriksa::where('id_dokter', $user->id)->with('dokter')->get();
         $polis = Poli::all();
         return view('jadwal.index', compact('jadwals', 'polis', 'user'));
     }
-
-    public function store(Request $request)
-    {
+    public function store(Request $request) {
+        $request->validate([
+            'hari' => 'required',
+            'jam_mulai' => 'required',
+            'jam_selesai' => 'required',
+        ], [
+            'hari.required' => 'Hari harus dipilih!',
+            'jam_mulai.required' => 'Jam mulai harus diisi!',
+            'jam_selesai.required' => 'Jam selesai harus diisi!',
+        ]);
         JadwalPeriksa::create([
             'id_dokter' => Auth::id(),
             'hari' => $request->hari,
@@ -27,9 +29,7 @@ class JadwalController extends Controller
         ]);
         return redirect('/jadwal')->with('success', 'Jadwal berhasil ditambahkan!');
     }
-
-    public function destroy($id)
-    {
+    public function destroy($id) {
         JadwalPeriksa::findOrFail($id)->delete();
         return redirect('/jadwal')->with('success', 'Jadwal berhasil dihapus!');
     }

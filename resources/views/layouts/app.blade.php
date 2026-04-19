@@ -79,6 +79,9 @@
             <a href="/obat" class="sidebar-link {{ request()->is('obat*') ? 'active' : '' }}">
                 <i class="fa fa-pills"></i> Obat
             </a>
+              <a href="/admin/pemeriksaan" class="sidebar-link {{ request()->is('admin/pemeriksaan*') ? 'active' : '' }}">
+                  <i class="fa fa-file-medical"></i> Pemeriksaan
+              </a>
             @endif
 
             @if(Auth::user()->role === "dokter")
@@ -86,10 +89,10 @@
             <a href="/" class="sidebar-link {{ request()->is('/') ? 'active' : '' }}">
                 <i class="fa fa-gauge"></i> Dashboard
             </a>
-            <a href="/pendaftaran" class="sidebar-link {{ request()->is('pendaftaran*') ? 'active' : '' }}">
+            <a href="/jadwal" class="sidebar-link {{ request()->is('jadwal*') ? 'active' : '' }}">
                 <i class="fa fa-calendar-days"></i> Jadwal Periksa
             </a>
-            <a href="/hasil-periksa" class="sidebar-link {{ request()->is('periksa*') ? 'active' : '' }}">
+            <a href="/periksa" class="sidebar-link {{ request()->is('periksa*') ? 'active' : '' }}">
                 <i class="fa fa-stethoscope"></i> Pemeriksaan
             </a>
             @endif
@@ -102,12 +105,18 @@
             <a href="/poli" class="sidebar-link {{ request()->is('poli*') ? 'active' : '' }}">
                 <i class="fa fa-hospital"></i> Poliklinik
             </a>
-            <a href="/pendaftaran" class="sidebar-link {{ request()->is('pendaftaran*') ? 'active' : '' }}">
+            <a href="/jadwal" class="sidebar-link {{ request()->is('jadwal*') ? 'active' : '' }}">
                 <i class="fa fa-clipboard-list"></i> Pendaftaran
             </a>
+              <a href="/riwayat" class="sidebar-link {{ request()->is('riwayat*') ? 'active' : '' }}">
+                  <i class="fa fa-clock-rotate-left"></i> Riwayat
+              </a>
             <a href="/hasil-periksa" class="sidebar-link {{ request()->is('hasil-periksa*') ? 'active' : '' }}">
                 <i class="fa fa-file-medical"></i> Hasil Pemeriksaan
             </a>
+              <a href="/pembayaran" class="sidebar-link {{ request()->is('pembayaran*') ? 'active' : '' }}">
+                  <i class="fa fa-credit-card"></i> Pembayaran
+              </a>
             @endif
 
         </nav>

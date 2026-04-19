@@ -10,7 +10,7 @@ use App\Http\Controllers\PoliController;
 use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\PeriksaController;
 use App\Http\Controllers\PendaftaranController;
-use App\Http\Controllers\Admin\PoliController as AdminPoliController;
+use App\Http\Controllers\HasilPeriksaController;
 
 Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
@@ -37,7 +37,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/obat/{id}/update', [ObatController::class, 'update']);
     Route::get('/obat/{id}/delete', [ObatController::class, 'destroy']);
 
-    Route::resource('polis', AdminPoliController::class)->middleware('role:admin');
     Route::get('/poli', [PoliController::class, 'index']);
     Route::post('/poli', [PoliController::class, 'store']);
     Route::get('/poli/{id}/edit', [PoliController::class, 'edit']);
@@ -50,9 +49,22 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/pendaftaran', [PendaftaranController::class, 'index']);
     Route::post('/pendaftaran', [PendaftaranController::class, 'store']);
+
     Route::get('/periksa', [PeriksaController::class, 'index']);
     Route::get('/periksa/{id}/form', [PeriksaController::class, 'form']);
-    Route::get('/hasil-periksa', [App\Http\Controllers\HasilPeriksaController::class, 'index']);
-    Route::get('/hasil-periksa', [App\Http\Controllers\HasilPeriksaController::class, 'index']);
     Route::post('/periksa/{id}/store', [PeriksaController::class, 'store']);
+
+    Route::get('/cetak-struk/{id}', [App\Http\Controllers\HasilPeriksaController::class, 'cetak']);
+    Route::get('/admin/pemeriksaan', [App\Http\Controllers\AdminPeriksaController::class, 'index']);
+    Route::get('/riwayat', [App\Http\Controllers\RiwayatController::class, 'index']);
+    Route::get('/riwayat/{id}/detail', [App\Http\Controllers\RiwayatController::class, 'detail']);
+    Route::get('/export/dokter', [App\Http\Controllers\ExportController::class, 'dokter']);
+    Route::get('/export/pasien', [App\Http\Controllers\ExportController::class, 'pasien']);
+    Route::get('/export/obat', [App\Http\Controllers\ExportController::class, 'obat']);
+    Route::get('/export/jadwal', [App\Http\Controllers\ExportController::class, 'jadwal']);
+    Route::get('/export/riwayat-pasien', [App\Http\Controllers\ExportController::class, 'riwayatPasien']);
+    Route::get('/pembayaran', [App\Http\Controllers\PembayaranController::class, 'index']);
+    Route::post('/pembayaran/{id}/upload', [App\Http\Controllers\PembayaranController::class, 'upload']);
+    Route::get('/pembayaran/{id}/konfirmasi', [App\Http\Controllers\PembayaranController::class, 'konfirmasi']);
+    Route::get('/hasil-periksa', [HasilPeriksaController::class, 'index']);
 });

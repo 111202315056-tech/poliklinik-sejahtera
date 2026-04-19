@@ -8,16 +8,10 @@ class PasienController extends Controller {
         return view('pasien.index', compact('pasiens'));
     }
     public function store(Request $request) {
-        User::create([
-            'nama' => $request->nama,
-            'alamat' => $request->alamat,
-            'no_ktp' => $request->no_ktp,
-            'no_hp' => $request->no_hp,
-            'email' => $request->email,
-            'password' => bcrypt($request->password ?? 'pasien123'),
-            'role' => 'pasien',
-        ]);
-        return redirect('/pasien')->with('success','Pasien berhasil ditambahkan! Password default: pasien123');
+        $lastNo = User::where('role','pasien')->whereNotNull('no_rm')->orderBy('id','desc')->first();
+        $newNo = 'RM' . str_pad(($lastNo ? intval(substr($lastNo->no_rm,2)) + 1 : 1), 5, '0', STR_PAD_LEFT);
+        User::create(['nama'=>$request->nama,'alamat'=>$request->alamat,'no_ktp'=>$request->no_ktp,'no_hp'=>$request->no_hp,'email'=>$request->email,'password'=>bcrypt($request->password ?? 'pasien123'),'role'=>'pasien','no_rm'=>$newNo]);
+        return redirect('/pasien')->with('success','Pasien ditambahkan! No. RM: '.$newNo);
     }
     public function edit($id) {
         $pasien = User::findOrFail($id);
