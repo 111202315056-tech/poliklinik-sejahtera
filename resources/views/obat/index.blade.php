@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<div style="display:grid;grid-template-columns:1fr 2fr;gap:24px;">
+<div style="display:flex;flex-wrap:wrap;gap:24px;">
 <div style="background:white;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);padding:24px;">
 <h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:16px;"><i class="fa fa-pills" style="color:#8b5cf6;margin-right:8px;"></i>{{ isset($obat) ? 'Edit Obat' : 'Tambah Obat' }}</h2>
 <form action="{{ isset($obat) ? '/obat/'.$obat->id.'/update' : '/obat' }}" method="POST">
@@ -28,7 +28,7 @@
 </form>
 </div>
 <div style="background:white;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);padding:24px;">
-<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:0;"><i class="fa fa-list" style="color:#8b5cf6;margin-right:8px;"></i>Daftar Obat</h2><a href="/export/obat" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a></div><a href="/export/obat" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a></div>
+<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:0;"><i class="fa fa-list" style="color:#8b5cf6;margin-right:8px;"></i>Daftar Obat</h2><a href="/export/obat" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a></div></div>
 @if(session('success'))<div style="background:#dcfce7;border:1px solid #86efac;color:#166534;padding:12px;border-radius:8px;margin-bottom:16px;font-size:13px;">{{ session('success') }}</div>@endif
 <table style="width:100%;border-collapse:collapse;font-size:13px;">
 <thead><tr style="background:#f5f3ff;">
