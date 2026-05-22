@@ -15,8 +15,22 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
+        // Buat Admin User
+        User::create([
+            'nama' => 'Admin',
+            'email' => 'admin@poliklinik.com',
+            'password' => \Illuminate\Support\Facades\Hash::make('admin123'),
+            'no_ktp' => '1234567890123456',
+            'no_hp' => '08123456789',
+            'no_rm' => 'ADMIN001',
+            'alamat' => 'Jl. Admin No. 1',
+            'role' => 'admin',
+            'id_poli' => null,
+        ]);
+
+        // Buat Test User
         User::factory()->create([
-            'name' => 'Test User',
+            'nama' => 'Test User',
             'email' => 'test@example.com',
         ]);
     }

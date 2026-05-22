@@ -2,8 +2,9 @@
 namespace App\Models;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 class User extends Authenticatable {
-    use Notifiable;
+    use HasFactory, Notifiable;
     protected $fillable = ['nama','alamat','no_ktp','no_hp','no_rm','role','email','password','id_poli'];
     protected $hidden = ['password','remember_token'];
     public function poli() { return $this->belongsTo(Poli::class, 'id_poli'); }
