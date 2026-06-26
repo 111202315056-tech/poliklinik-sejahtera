@@ -29,6 +29,7 @@
 </div>
 <div style="background:white;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);padding:24px;">
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;"><h2 style="font-size:16px;font-weight:700;color:#1e293b;margin-bottom:0;"><i class="fa fa-list" style="color:#8b5cf6;margin-right:8px;"></i>Daftar Obat</h2><a href="/export/obat" style="background:#16a34a;color:white;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:600;"><i class="fa fa-file-excel" style="margin-right:6px;"></i>Export Excel</a></div></div>
+@if(session('error'))<div style="background:#fee2e2;border:1px solid #fca5a5;color:#b91c1c;padding:12px;border-radius:8px;margin-bottom:16px;font-size:13px;">{{ session('error') }}</div>@endif
 @if(session('success'))<div style="background:#dcfce7;border:1px solid #86efac;color:#166534;padding:12px;border-radius:8px;margin-bottom:16px;font-size:13px;">{{ session('success') }}</div>@endif
 <table style="width:100%;border-collapse:collapse;font-size:13px;">
 <thead><tr style="background:#f5f3ff;">
@@ -56,9 +57,30 @@
 @endif
 </td>
 <td style="padding:12px;">
-<div style="display:flex;gap:6px;">
+<div style="display:flex;gap:6px;flex-wrap:wrap;">
 <a href="/obat/{{ $o->id }}/edit" style="background:#f59e0b;color:white;padding:5px 10px;border-radius:6px;font-size:12px;text-decoration:none;"><i class="fa fa-edit"></i></a>
 <a href="/obat/{{ $o->id }}/delete" onclick="return confirm('Yakin hapus?')" style="background:#ef4444;color:white;padding:5px 10px;border-radius:6px;font-size:12px;text-decoration:none;"><i class="fa fa-trash"></i></a>
+<button type="button" onclick="var r=document.getElementById('stock-row-{{ $o->id }}');r.style.display=r.style.display==='none'?'table-row':'none';" style="background:#4f46e5;color:white;padding:5px 10px;border-radius:6px;font-size:12px;border:none;cursor:pointer;">Kelola Stok</button>
+</div>
+</td>
+</tr>
+<tr id="stock-row-{{ $o->id }}" style="display:none;border-bottom:1px solid #f1f5f9;background:#f8fafc;">
+<td colspan="6" style="padding:12px;">
+<div style="display:flex;flex-wrap:wrap;gap:16px;align-items:flex-start;">
+<div style="flex:1;min-width:220px;">
+<div style="font-size:14px;font-weight:700;color:#1e293b;margin-bottom:6px;">Kelola Stok: {{ $o->nama_obat }}</div>
+<div style="color:#475569;font-size:13px;">Stok saat ini: {{ $o->stok }}</div>
+</div>
+<form action="/obat/{{ $o->id }}/tambah-stok" method="POST" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+@csrf
+<input type="number" name="jumlah" min="1" placeholder="Jumlah" style="border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;font-size:14px;outline:none;width:120px;">
+<button type="submit" style="background:#16a34a;color:white;padding:10px 14px;border:none;border-radius:8px;font-size:13px;cursor:pointer;">Tambah</button>
+</form>
+<form action="/obat/{{ $o->id }}/kurangi-stok" method="POST" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+@csrf
+<input type="number" name="jumlah" min="1" placeholder="Jumlah" style="border:1px solid #cbd5e1;border-radius:8px;padding:8px 12px;font-size:14px;outline:none;width:120px;">
+<button type="submit" style="background:#ef4444;color:white;padding:10px 14px;border:none;border-radius:8px;font-size:13px;cursor:pointer;">Kurangi</button>
+</form>
 </div>
 </td>
 </tr>

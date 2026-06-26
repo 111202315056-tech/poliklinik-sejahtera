@@ -22,6 +22,20 @@ class ObatController extends Controller {
         Obat::findOrFail($id)->update(['nama_obat'=>$request->nama_obat,'kemasan'=>$request->kemasan,'harga'=>$request->harga,'stok'=>$request->stok]);
         return redirect('/obat')->with('success','Obat berhasil diubah!');
     }
+    public function tambahStok(Request $request, $id) {
+        $request->validate(['jumlah'=>'required|integer|min:1']);
+        Obat::findOrFail($id)->increment('stok', $request->jumlah);
+        return redirect('/obat')->with('success','Stok berhasil ditambahkan!');
+    }
+    public function kurangiStok(Request $request, $id) {
+        $request->validate(['jumlah'=>'required|integer|min:1']);
+        $obat = Obat::findOrFail($id);
+        if ($request->jumlah > $obat->stok) {
+            return redirect('/obat')->with('error','Stok tidak mencukupi! Stok saat ini: '.$obat->stok);
+        }
+        $obat->decrement('stok', $request->jumlah);
+        return redirect('/obat')->with('success','Stok berhasil dikurangi!');
+    }
     public function destroy($id) {
         Obat::findOrFail($id)->delete();
         return redirect('/obat')->with('success','Obat berhasil dihapus!');

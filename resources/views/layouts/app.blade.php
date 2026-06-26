@@ -105,7 +105,7 @@
             <a href="/poli" class="sidebar-link {{ request()->is('poli*') ? 'active' : '' }}">
                 <i class="fa fa-hospital"></i> Poliklinik
             </a>
-            <a href="/jadwal" class="sidebar-link {{ request()->is('jadwal*') ? 'active' : '' }}">
+            <a href="/pendaftaran" class="sidebar-link {{ request()->is('jadwal*') ? 'active' : '' }}">
                 <i class="fa fa-clipboard-list"></i> Pendaftaran
             </a>
               <a href="/riwayat" class="sidebar-link {{ request()->is('riwayat*') ? 'active' : '' }}">

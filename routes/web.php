@@ -39,6 +39,8 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/obat', [ObatController::class, 'store']);
     Route::get('/obat/{id}/edit', [ObatController::class, 'edit']);
     Route::post('/obat/{id}/update', [ObatController::class, 'update']);
+    Route::post('/obat/{id}/tambah-stok', [ObatController::class, 'tambahStok']);
+    Route::post('/obat/{id}/kurangi-stok', [ObatController::class, 'kurangiStok']);
     Route::get('/obat/{id}/delete', [ObatController::class, 'destroy']);
     Route::get('/poli', [PoliController::class, 'index']);
     Route::post('/poli', [PoliController::class, 'store']);
