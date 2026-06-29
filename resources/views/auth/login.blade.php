@@ -61,7 +61,7 @@
                 </form>
             </div>
 
-            <div class="bg-gray-50 px-8 py-4 text-center text-xs text-gray-400 border-t">
+            <div class="px-8 py-4 text-center border-t bg-white"><p class="text-sm text-gray-500">Belum punya akun? <a href="/register" class="text-blue-600 font-bold hover:underline">Daftar di sini</a></p></div><div class="bg-gray-50 px-8 py-4 text-center text-xs text-gray-400 border-t">
                 &copy; 2026 Poliklinik Sejahtera. All rights reserved.
             </div>
         </div>
